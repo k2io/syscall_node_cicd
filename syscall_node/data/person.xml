@@ -1,0 +1,18 @@
+<?xml version = "1.0" encoding="UTF-8"?>
+<contact-info>
+   <contact>
+      <name>Tanmay Patil</name>
+      <company>TutorialsPoint</company>
+      <phone>(011) 123-4567</phone>
+   </contact>
+   <contact>
+      <name>Manisha Patil</name>
+      <company>TutorialsPoint</company>
+      <phone>(011) 789-4567</phone>
+   </contact>
+   <contact>
+      <name>Ayush Garg</name>
+      <company>App Perfecf</company>
+      <phone>9876543431</phone>
+   </contact>
+</contact-info>

@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<catalog>
+   <book id="bk101">
+      <author>Garghentini, Davide</author>
+      <title>XML Developer's Guide</title>
+      <genre>Computer</genre>
+      <price>44.95</price>
+      <publishdate>2000-10-01</publishdate>
+      <description>An in-depth look at creating applicationswith XML.</description>
+   </book>
+   <book id="bk102">
+      <author>Garcia, Debra</author>
+      <title>Midnight Rain</title>
+      <genre>Fantasy</genre>
+      <price>5.95</price>
+      <publishdate>2000-12-16</publishdate>
+      <description>A former architect battles corporate zombies, an evil sorceress, and her own childhood to become queen of the world.</description>
+   </book>
+   <book id="bk103">
+      <author>Bert Bates, Kathy Sierra</author>
+      <title>Head First Java</title>
+      <genre>Computer</genre>
+      <price>48.95</price>
+      <publishdate>2000-12-11</publishdate>
+      <description>An in-depth look at creating applications with Java.</description>
+   </book>
+</catalog>
