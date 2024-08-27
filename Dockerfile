@@ -3,7 +3,7 @@ FROM ubuntu:22.04
 ENV DEBIAN_FRONTEND="noninteractive"
 
 RUN apt-get update \
-  && apt install -y wget curl vim lsb-release python3-pip iputils-ping build-essential gcc-multilib g++-multilib \
+  && apt install -y wget curl git vim lsb-release python3-pip iputils-ping build-essential gcc-multilib g++-multilib \
   && pip3 install python-gnupg 
 
 # Install latest Mysql
@@ -36,7 +36,6 @@ RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 467B942D3A79BD29 \
 # Install Mysql 5.7
 RUN apt install -y -f mysql-client=5.7* mysql-community-server=5.7* mysql-server=5.7*
 
-
 # enable login using above creds
 RUN usermod -d /var/lib/mysql/ mysql \
   && MYSQLD_OPTS="--skip-grant-tables" service mysql start \
@@ -55,17 +54,19 @@ COPY syscall_node/ /syscall_node/
 COPY startUpScript.sh /syscall_node/
 COPY syscall_node/attack.sh /
 
+RUN chmod 777 /syscall_node/
 WORKDIR /syscall_node/
 
 ENV NVM_DIR /root/.nvm
 # Install NVM(Node)
 RUN curl -LsS https://raw.githubusercontent.com/nvm-sh/nvm/master/install.sh | bash \
   && . $NVM_DIR/nvm.sh \
-  && apt update \
-  && apt-get install -y git 
+  && nvm install 18.16.1 \
+  && npm install --save \
+  && npm install newrelic@latest
 
-RUN chmod 777 /syscall_node/startUpScript.sh
-RUN chmod 777 /syscall_node/attack.sh
+RUN chmod 777 /syscall_node/startUpScript.sh \
+  && chmod 777 /syscall_node/attack.sh
 
 ENV NEW_RELIC_SECURITY_CONFIG_PATH=""
 ENV NR_OPTS=""
@@ -73,5 +74,7 @@ ENV APM_BRANCH=""
 ENV CSEC_BRANCH=""
 ENV NODE_VERSION=""
 ENV APM_VERSION="latest"
+
+RUN cp /syscall_node/node_modules/newrelic/newrelic.js /syscall_node/
 
 CMD ["/bin/bash","-c","/syscall_node/startUpScript.sh && tail -f /dev/null"]
