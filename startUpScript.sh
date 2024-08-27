@@ -27,4 +27,4 @@ fi
 # start Ldap Server
 node ldapServer.js & 
 # start NodeJS application
-node $NR_OPTS index.js 
+node index.js 
