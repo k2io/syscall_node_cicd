@@ -1,4 +1,6 @@
 const express = require("express");
+const newrelic = require('newrelic');
+
 const app = express();
 const compression = require("compression");
 var cookieParser = require("cookie-parser");
