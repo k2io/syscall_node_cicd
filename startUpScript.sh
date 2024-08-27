@@ -1,3 +1,6 @@
+export NVM_DIR="/root/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+
 # Start mysql
 chown -R mysql:mysql /var/lib/mysql
 service mysql start
