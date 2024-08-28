@@ -75,7 +75,7 @@ ENV CSEC_BRANCH=""
 ENV NODE_VERSION=""
 ENV APM_VERSION="latest"
 
-# Install newrelic NPM package
+#Install newrelic NPM package
 
 #COPY config file to application root
 
