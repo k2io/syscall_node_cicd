@@ -68,13 +68,6 @@ RUN curl -LsS https://raw.githubusercontent.com/nvm-sh/nvm/master/install.sh | b
 RUN chmod 777 /syscall_node/startUpScript.sh \
   && chmod 777 /syscall_node/attack.sh
 
-ENV NEW_RELIC_SECURITY_CONFIG_PATH=""
-ENV NR_OPTS=""
-ENV APM_BRANCH=""
-ENV CSEC_BRANCH=""
-ENV NODE_VERSION=""
-ENV APM_VERSION="latest"
-
 #Install newrelic NPM package
 
 #COPY config file to application root
