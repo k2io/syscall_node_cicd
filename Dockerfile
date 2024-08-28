@@ -75,6 +75,8 @@ ENV CSEC_BRANCH=""
 ENV NODE_VERSION=""
 ENV APM_VERSION="latest"
 
-RUN cp /syscall_node/node_modules/newrelic/newrelic.js /syscall_node/
+# Install newrelic NPM package
+
+#COPY config file to application root
 
 CMD ["/bin/bash","-c","/syscall_node/startUpScript.sh && tail -f /dev/null"]
