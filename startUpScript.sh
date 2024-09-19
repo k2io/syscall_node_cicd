@@ -15,15 +15,42 @@ mysql -u root K2test < database/users.sql
 echo "Sleeping 10 sec for Mongo startup..."
 sleep 10s
 
-if [ -z "$CSEC_BRANCH" ]
+
+# Agent installation
+if [ -z "$APM_FORK" ]
 then
-    echo "CSEC_BRANCH is not set"
+    if [ -z "$APM_BRANCH" ]
+    then
+        echo "APM_BRANCH is not set, installing ${APM_VERSION} APM agent"
+        npm install newrelic@${APM_VERSION}
+    else
+        echo "https://github.com/newrelic/node-newrelic.git/#${APM_BRANCH}"
+        npm install "https://github.com/newrelic/node-newrelic.git/#${APM_BRANCH}"
+    fi
+
+    if [ -z "$CSEC_BRANCH" ]
+    then
+        echo "CSEC_BRANCH is not set"
+    else
+        rm -rf node_modules/\@newrelic/security-agent
+        echo "Installing CSEC agent from https://github.com/newrelic/csec-node-agent.git/#${CSEC_BRANCH} branch"
+        npm install "https://github.com/newrelic/csec-node-agent.git/#${CSEC_BRANCH}"
+        rm -rf node_modules/newrelic/node_modules/@newrelic/security-agent
+    fi
 else
-    rm -rf node_modules/\@newrelic/security-agent
-    echo "https://github.com/newrelic/csec-node-agent.git/#${CSEC_BRANCH}"
-    npm install "https://github.com/newrelic/csec-node-agent.git/#${CSEC_BRANCH}"
-    rm -rf node_modules/newrelic/node_modules/@newrelic/security-agent
+    echo "Installing Newrelic agent from newrelic fork ${APM_FORK} branch"
+    npm install "https://github.com/k2io/node-newrelic-fork.git/#${APM_FORK}"
 fi
+
+# if [ -z "$CSEC_BRANCH" ]
+# then
+#     echo "CSEC_BRANCH is not set"
+# else
+#     rm -rf node_modules/\@newrelic/security-agent
+#     echo "https://github.com/newrelic/csec-node-agent.git/#${CSEC_BRANCH}"
+#     npm install "https://github.com/newrelic/csec-node-agent.git/#${CSEC_BRANCH}"
+#     rm -rf node_modules/newrelic/node_modules/@newrelic/security-agent
+# fi
 
 # command to copy newrelic.js from node_modules to application directory and configure fields in config file
 sleep 3s
